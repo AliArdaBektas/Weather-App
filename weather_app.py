@@ -5,11 +5,15 @@ import os
 load_dotenv()
 api_key = os.getenv("API_KEY")
 
+BASE_URL = "http://api.openweathermap.org/data/2.5/weather"
+UNITS = "metric"
+DEFAULT_CİTY = "istanbul"
+
 def show_weather():
     city = input("Enter the city name you wanna see the weather: ")
     whatsee = input("Enter what you wanna see (weather, temperature, wind, sea level): ")
 
-    url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
+    url = f"{BASE_URL}?q={city}&appid={api_key}&units={UNITS}"
     response = requests.get(url)
     data = response.json()
 
@@ -28,7 +32,7 @@ def show_weather():
         print("Invalid input")
 
 def api_test():
-    url = f"http://api.openweathermap.org/data/2.5/weather?q=istanbul&appid={api_key}&units=metric"
+    url = f"{BASE_URL}?q={DEFAULT_CİTY}&appid={api_key}&units={UNITS}"api_key
     response = requests.get(url)
     data = response.json()
     if response.status_code == 200:
